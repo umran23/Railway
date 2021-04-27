@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns = "http://www.w3.org/1999/xhtml"
+      xmlns:th = "http://www.thymeleaf.org"
+      xmlns:sec = "http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<script src="~{static/game.js}" type="text/javascript"></script>
+<style>
+ .center{text-align:center}
+#space-invaders {
+    margin: 0 auto;
+    display: block;
+    background: white}
+</style>
+
+<head>
+    <title>Attack!</title>
+</head>
+<body>
+
+<p class="center">Space Invaders Stole <B>your ID</B> for this page! Take revenge on them!
+    <br/> Use <span class="label label-danger">Space</span> to shoot and <span class="label label-danger"> ←
+    </span>&#160;<span class="label label-danger"> →
+    </span> to move!&#160;&#160;&#160;
+    <button class="btn btn-default btn-xs" id="restart">
+        Restart
+    </button></p>
+
+<canvas id="space-invaders"/>
+</body>
+
+</html>
