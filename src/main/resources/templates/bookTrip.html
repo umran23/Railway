@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/master-page}">
+<title>Book a Trip</title>
+<body>
+<th:block layout:fragment="content">
+    <div class="row">
+        <div class="row">
+            <div class="col-md-12" style="margin-bottom: 10px">
+                <h1 style="color: darkblue">Book a Trip</h1>
+            </div>
+
+        </div>
+    </div>
+
+    <form action="/trip/book" method="post">
+        <div class="row">
+
+
+            <div class="from-group col-md-4">
+                <label class="col-form-label" for="departureStation">From</label>
+                <select class="form-control" id="departureStation" name="departureStation">
+                    <option th:each="ss, i:${stations}" th:text="${ss.stationName}"
+                            th:value="${ss.stationId}">
+                    </option>
+                </select>
+            </div>
+
+            <div class="from-group col-md-4">
+                <label class="col-form-label" for="destinationStation">To</label>
+                <span th:if="${StationError!=null}" th:text="${StationError}"
+                      class="badge badge-danger"></span>
+                <select class="form-control" id="destinationStation" name="destinationStation">
+                    <option th:each="a, i:${stations}" th:text="${a.stationName}"
+                            th:value="${a.stationId}">
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-group col-md-4">
+                <label class="col-form-label" for="departureTime">Departure Time</label>
+                <input type="date" class="form-control" placeholder="" id="departureTime"
+                       name="departureTime" required>
+            </div>
+
+
+            <div class="form-group col-12">
+                <button type="submit" class="btn btn-success" style="float: right">Search</button>
+            </div>
+
+        </div>
+    </form>
+    <div class="row">
+        <th:block th:if="${notFound !=null}">
+            <div class="col-12">
+                <p style="text-align: center; margin-top: 30px; color: red; font-weight: bold">No Record Found!</p>
+            </div>
+        </th:block>
+        <th:block th:if="${trips}">
+            <div class="row" style="margin-bottom: 10px">
+                <div class="col-md-6">
+                    <h1 style="color: darkblue">Result </h1>
+                </div>
+
+            </div>
+            <table class="table table-sm">
+                <thead>
+                <tr class="table-active">
+                    <th scope="col">ID</th>
+                    <th scope="col">Trip Number</th>
+                    <th scope="col">From</th>
+                    <th scope="col">To</th>
+                    <th scope="col">Departure</th>
+                    <th scope="col">Arrival</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Train</th>
+                    <th scope="col">Available Seats</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <div th:each="trip, iterStat:${trips}">
+                    <tr style="background-color: #fdfdfd">
+                        <th scope="row" th:text="${trip.tripId}">Dark</th>
+                        <td th:text="${trip.tripNumber}"></td>
+                        <td th:text="${trip.departureStation.stationName}"></td>
+                        <td th:text="${trip.destinationStation.stationName}"></td>
+                        <td th:text="${trip.departureDate+' '+trip.departureTime}"></td>
+                        <td th:text="${trip.arrivalDate+' '+trip.arrivalTime}"></td>
+                        <td th:text="${trip.price}"></td>
+                        <td th:text="${trip.train.model}"></td>
+                        <td th:text="${trip.train.numberOfSeats - trip.passengers.size() +'/'+ trip.train.numberOfSeats}"></td>
+                        <td><a type="button" class="btn btn-primary btn-sm"
+                               th:if="${trip.passengers.size()<trip.train.numberOfSeats}"
+                               th:href="@{/trip/book/new(tripId=${trip.tripId})}">Book</a></td>
+                    </tr>
+                </div>
+                </tbody>
+            </table>
+
+        </th:block>
+
+    </div>
+
+
+</th:block>
+</body>
+</html>

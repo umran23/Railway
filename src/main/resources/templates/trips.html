@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/master-page}">
+<meta charset="UTF-8">
+<title>Trips</title>
+</head>
+<body>
+<th:block layout:fragment="content">
+    <div class="row"  style="margin-bottom: 10px">
+        <div class="col-md-6">
+            <h1 style="color: darkblue">Trips List </h1>
+        </div>
+        <div class="col-md-6">
+            <a href="/trip/new">
+                <button type="button" class="btn btn-outline-primary" style="float: right">Add Trip</button></a>
+        </div>
+    </div>
+    <table class="table table-sm">
+        <thead>
+        <tr class="table-active">
+            <th scope="col">ID</th>
+            <th scope="col">Trip Number</th>
+            <th scope="col">From</th>
+            <th scope="col">To</th>
+            <th scope="col">Departure</th>
+            <th scope="col">Arrival</th>
+            <th scope="col">Price</th>
+            <th scope="col">Train</th>
+            <th scope="col">Available Seats</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <div th:each="trip, iterStat:${trips}">
+            <tr style="background-color: #fdfdfd">
+                <th scope="row" th:text="${trip.tripId}">Dark</th>
+                <td th:text="${trip.tripNumber}"></td>
+                <td th:text="${trip.departureStation.stationName}"></td>
+                <td th:text="${trip.destinationStation.stationName}"></td>
+                <td th:text="${trip.departureDate+' '+trip.departureTime}"></td>
+                <td th:text="${trip.arrivalDate+' '+trip.arrivalTime}"></td>
+                <td th:text="${trip.price}"></td>
+                <td th:text="${trip.train.model}"></td>
+                <td th:text="${trip.train.numberOfSeats - trip.passengers.size() +'/'+ trip.train.numberOfSeats}">
+
+                </td>
+                <td ><a th:href="@{/passengers(tripId=${trip.tripId})}">...</a></td>
+                <td ><a th:href="@{/trip/delete(tripId=${trip.tripId})}">
+                    <button type="button" class="btn btn-outline-danger btn-sm"  onclick="alert('Are you sure to cancel this trip?')">
+                        Cancel</button></a></td>
+            </tr>
+        </div>
+        </tbody>
+    </table>
+    <div>
+        <ul class="pagination">
+            <li class="page-item disabled">
+                <a class="page-link" href="#">Pages:</a>
+            </li>
+            <th:block th:each="i:${#numbers.sequence(1,trips.totalPages)}">
+                <li th:class="${currentPage}==(${i-1}) ? 'page-item active' : 'page-item'">
+                    <a class="page-link" th:href="@{/trips(pageNo=(${i-1}))}" th:text="${i}"></a>
+                </li>
+            </th:block>
+        </ul>
+
+
+    </div>
+</th:block>
+</body>
+</html>

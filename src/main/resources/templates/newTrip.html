@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/master-page}">
+<title>Schedule a Trip</title>
+<body>
+<th:block layout:fragment="content">
+    <div class="row">
+        <div class="row">
+            <div class="col-md-12" style="margin-bottom: 10px">
+                <h1 style="color: darkblue">Schedule a Trip </h1>
+            </div>
+
+        </div>
+    </div>
+
+    <form action="/trip/new" method="post" th:object="${trip}">
+        <div class="row">
+
+
+            <div class="from-group col-md-4">
+                <label class="col-form-label" for="train">Train</label>
+                <span th:if="${#fields.hasErrors('train')}" th:errors="*{train}"
+                      class="badge badge-danger"></span>
+                <select class="form-control" id="train" name="train">
+                    <option th:each="train, i:${trains}" th:text="${train.model}"
+                            th:value="${train.trainId}">
+                    </option>
+                </select>
+            </div>
+
+
+            <div class="from-group col-md-4">
+                <label class="col-form-label" for="departureStation">Departure Station</label>
+                <span th:if="${#fields.hasErrors('departureStation')}" th:errors="*{departureStation}"
+                      class="badge badge-danger"></span>
+                <select class="form-control" id="departureStation" name="departureStation">
+                    <option th:each="station, i:${stations}" th:text="${station.stationName}"
+                            th:value="${station.stationId}">
+                    </option>
+                </select>
+            </div>
+
+            <div class="from-group col-md-4">
+                <label class="col-form-label" for="destinationStation">Destination Station</label>
+                <span th:if="${#fields.hasErrors('destinationStation')}" th:errors="*{destinationStation}"
+                      class="badge badge-danger"></span>
+                <span th:if="${sameStationError!=null}" th:text="${sameStationError}"
+                      class="badge badge-danger"></span>
+                <select class="form-control" id="destinationStation" name="destinationStation">
+                    <option th:each="station, i:${stations}" th:text="${station.stationName}"
+                            th:value="${station.stationId}">
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label class="col-form-label" for="departureDate">Departure Date</label>
+                <span th:if="${#fields.hasErrors('departureDate')}" th:errors="*{departureDate}"
+                      class="badge badge-danger"></span>
+                <input type="date" class="form-control" id="departureDate"
+                       name="departureDate" th:value="${trip.departureDate}" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label class="col-form-label" for="departureTime">Departure Time</label>
+                <span th:if="${#fields.hasErrors('departureTime')}" th:errors="*{departureTime}"
+                      class="badge badge-danger"></span>
+                <input type="time" class="form-control" id="departureTime"
+                       name="departureTime">
+            </div>
+
+            <div class="form-group col-md-6">
+                <label class="col-form-label" for="arrivalDate">Arrival Date</label>
+                <span th:if="${#fields.hasErrors('arrivalDate')}" th:errors="*{arrivalDate}"
+                      class="badge badge-danger"></span>
+                <input type="date" class="form-control" id="arrivalDate"
+                       name="arrivalDate" th:value="${trip.arrivalDate}" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label class="col-form-label" for="arrivalTime">Arrival Time</label>
+                <span th:if="${#fields.hasErrors('arrivalTime')}" th:errors="*{arrivalTime}"
+                      class="badge badge-danger"></span>
+                <input type="time" class="form-control" id="arrivalTime"
+                       name="arrivalTime">
+            </div>
+
+            <div class="form-group col-md-6">
+                <label class="col-form-label" for="tripNumber">Trip Number</label>
+                <span th:if="${#fields.hasErrors('tripNumber')}" th:errors="*{tripNumber}"
+                      class="badge badge-danger"></span>
+                <input type="text" class="form-control" placeholder="" id="tripNumber"
+                       name="tripNumber" th:value="${trip.tripNumber}" required>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label class="col-form-label" for="price">Price</label>
+                <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}"
+                      class="badge badge-danger"></span>
+                <input type="double" class="form-control" placeholder="" id="price"
+                       name="price" th:value="${trip.price}" required>
+            </div>
+
+
+            <div class="form-group col-12">
+                <button type="submit" class="btn btn-success" style="float: right">Save</button>
+            </div>
+
+        </div>
+    </form>
+
+</th:block>
+</body>
+</html>
