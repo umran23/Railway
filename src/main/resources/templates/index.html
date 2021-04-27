@@ -1,12 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Railway</title>
-</head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/master-page}">
+
 <body>
+<th:block layout:fragment="content">
 
-<p> Enter Data Base <a href="/home">Data Base</a></p>
+    <h2>Welcome to Russian Ultra-Speed Railway site!</h2>
+    <p>
+        RURS is an Russian Railway company. It has numbers of branches spread across the world. A person who wants to reserve a Train ticket must contact any of the nearest RUSR branch.<br>The RUSR manages trip operations manually, but as its customers grow in number, managing flight operations manually becomes difficult and time consuming. So, it would be better to use an automated system.
+        <br>The Train Ticket Booking (TTB) provides a solution for online train ticket booking. It will have functionalities like schedule trips, search trip, book trip for customers, and verify trip ticket. The system should be convenient and user-friendly.
+        <br>
+    <h3>The users include:</h3>
+    <ol>
+        <li>    Admin who can add trip, cancel trip, add train, remove train, and add station.</li>
+        <li>    Travel Agents who can search trip, book trip or cancel reservation for customer.</li>
+        <li>    Customers who can search trips and verify their ticket in the system.</li>
+    </ol>
+        <br>
+    <h4>Customer information include first name, last name, Date of birth, gender, phone number, and address.</h4>
 
+    </p>
+    <img style="width:300px" th:src="@{/img/umran.jpg}"/>
+</th:block>
 </body>
 </html>
