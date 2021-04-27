@@ -29,7 +29,9 @@ public class Trip {
 
     @ManyToOne
     Train train;
-    @OneToMany
+    /*Link the Trip Class DataBase with the Passenger as one trip to many passengers*/
+    /* MappedBy here is very important */
+    @OneToMany(mappedBy = "trip")
     List<Passenger> passengers =new ArrayList<>();
 
     public Trip(){}
@@ -101,20 +103,20 @@ public class Trip {
         this.price = price;
     }
 
-    public Station getDepartureStaion() {
+    public Station getDepartureStation() {
         return departureStation;
     }
 
-    public void setDepartureStaion(Station departureStaion) {
-        this.departureStation = departureStaion;
+    public void setDepartureStation(Station departureStation) {
+        this.departureStation = departureStation;
     }
 
-    public Station getDestinationStaion() {
+    public Station getDestinationStation() {
         return destinationStation;
     }
 
-    public void setDestinationStaion(Station destinationStaion) {
-        this.destinationStation = destinationStaion;
+    public void setDestinationStation(Station destinationStation) {
+        this.destinationStation = destinationStation;
     }
 
     public Train getTrain() {

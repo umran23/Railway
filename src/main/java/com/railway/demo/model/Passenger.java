@@ -93,11 +93,11 @@ public class Passenger {
         this.address = address;
     }
 
-    public Trip getFlight() {
+    public Trip getTrip() {
         return trip;
     }
 
-    public void setFlight(Trip trip) {
+    public void setTrip(Trip trip) {
         this.trip = trip;
     }
 
