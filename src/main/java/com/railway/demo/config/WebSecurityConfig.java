@@ -21,6 +21,7 @@ import javax.sql.DataSource;
 @EnableGlobalMethodSecurity(securedEnabled = true,proxyTargetClass = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Qualifier("userServiceImpl")
     @Autowired
     private UserDetailsService userService;
 
