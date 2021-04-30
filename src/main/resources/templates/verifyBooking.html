@@ -80,17 +80,17 @@
                 </tbody>
             </table>
             <hr>
-            <h3>Flight Info</h3>
+            <h3>Trip Info</h3>
             <table class="table table-sm">
                 <thead>
                 <tr class="table-active">
-                    <th scope="col">Flight Number</th>
+                    <th scope="col">Trip Number</th>
                     <th scope="col">From</th>
                     <th scope="col">To</th>
                     <th scope="col">Departure</th>
                     <th scope="col">Arrival</th>
-                    <th scope="col">Flight Charge</th>
-                    <th scope="col">Aircraft</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Train</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -109,7 +109,7 @@
                 </tbody>
             </table>
             <th:block sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_AGENT')">
-                <form method="post" action="/flight/book/cancel">
+                <form method="post" action="/trip/book/cancel">
                     <input type="hidden" th:value="${passenger.passengerId}" name="passengerId">
                     <button type="submit" class="btn btn-sm btn-danger">Cancel This Ticket</button>
                 </form>
