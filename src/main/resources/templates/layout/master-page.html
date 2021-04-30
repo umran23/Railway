@@ -10,8 +10,20 @@
 
 </head>
 <body>
+<style>
+    .logo {
+    display: inline-block;
+    vertical-align: top;
+    width: 100px;
+    height: 60px;
+    margin-right: 20px;
+    margin-top: 15px;
+    background-color: transparent;
+    }
+</style>
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary" style="margin-bottom: 20px">
-    <a class="navbar-brand" href="#">RUSR</a>
+    <a class="navbar-brand" href="/"><img class="logo" th:src="@{/img/Logo.png}" ></a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
             aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,8 +66,8 @@
         </ul>
 
         <div sec:authorize="isAuthenticated()">
-            <span style="color: white">Welcome</span>
-            <span style="color: white" sec:authentication="principal.username"></span>
+            <span style="color: white">Welcome  </span>
+            <span style="color: white" sec:authentication="principal.username"> </span>
             <a href="/logout">
                 <button class="btn btn-secondary my-2 my-sm-0" type="submit">Logout</button>
             </a>
